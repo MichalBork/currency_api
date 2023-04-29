@@ -80,7 +80,7 @@ class CurrencyController extends AbstractController
         foreach ($currencyObjectList as $currencyObject) {
             $currencyList[] = [
                 'currency' => $currencyObject->getName(),
-                'amount' => $currencyObject->getAmount(),
+                'amount' => $currencyObject->getAmount()/100,
                 'date' => date('Y-m-d', $currencyObject->getCreatedAt())
             ];
         }
@@ -103,7 +103,7 @@ class CurrencyController extends AbstractController
 
         $currencyList = [
             'currency' => $currencyObject->getName(),
-            'amount' => $currencyObject->getAmount(),
+            'amount' => $currencyObject->getAmount()/100,
             'date' => date('Y-m-d', $currencyObject->getCreatedAt())
         ];
 
