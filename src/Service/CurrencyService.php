@@ -5,6 +5,8 @@ namespace App\Service;
 use App\Entity\Currency;
 use App\Exception\CurrencyValidationException;
 use App\Repository\CurrencyRepository;
+use DateTimeImmutable;
+use Doctrine\DBAL\Types\DateImmutableType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CurrencyService
@@ -20,7 +22,9 @@ class CurrencyService
 
     public function isCurrencyExists(string $name): bool
     {
-        return $this->currencyRepository->findOneBy(['name' => $name]) !== null;
+        return $this->currencyRepository->findOneBy(
+                ['name' => $name, 'createdAt' => (new DateTimeImmutable('midnight'))->getTimestamp()]
+            ) !== null;
     }
 
 
@@ -35,7 +39,7 @@ class CurrencyService
      */
     public function updateCurrency(string $name, int $amount): void
     {
-        $currency = $this->getCurrency($name);
+        $currency = $this->getCurrencyByNameAndDate($name, (new DateTimeImmutable('midnight'))->getTimestamp());
         $currency->setAmount($amount);
         $currency->setCreatedAt((new \DateTimeImmutable('midnight'))->getTimestamp());
 

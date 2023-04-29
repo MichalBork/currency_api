@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,7 +14,11 @@ class Currency
 {
 
     #[Id]
-    #[Column(type: 'string', unique: true)]
+    #[GeneratedValue]
+    #[Column(type: 'integer')]
+    private int $id;
+
+    #[Column(type: 'string')]
     #[Assert\NotBlank]
     private string $name;
 
@@ -79,9 +84,6 @@ class Currency
     {
         $this->createdAt = $createdAt;
     }
-
-
-
 
 
 }
