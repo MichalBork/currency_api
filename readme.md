@@ -1,5 +1,12 @@
 ### Api do prostego zapisu walut
 
+#### Instalacja
+1. Sklonuj repozytorium
+2. Zainstaluj zależności composer install
+3. Wykonaj migracje php bin/console doctrine:migrations:migrate
+4. Wygeneruj uzytkownika php bin/console app:create-new-user
+
+
 #### Opis
 API służy do zapisywania kursów walut. Poniżej przedstawiam najważniejsze informacje na jego temat:
 
