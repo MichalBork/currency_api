@@ -21,9 +21,9 @@ class ApiKey
 
 
     #[Id]
-    #[Column(type: 'uuid', unique: true)]
+    #[Column(type: 'string', unique: true)]
     #[GeneratedValue(strategy: 'NONE')]
-    private UuidInterface $id;
+    private string $id;
 
     #[OneToOne(inversedBy: 'apiKeys', targetEntity: User::class)]
     #[JoinColumn(name: 'user_id', referencedColumnName: 'id')]
@@ -32,8 +32,19 @@ class ApiKey
 
     public function __construct(User $user)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Uuid::uuid4()->toString();
         $this->user = $user;
+    }
+
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 
 

@@ -21,7 +21,7 @@ class CheckTokenValidityCommandHandler
     /**
      * @throws InvalidAuthTokenException
      */
-    public function __invoke(CheckTokenValidityCommand $checkTokenValidityCommand): void
+    public function __invoke(CheckTokenValidityCommand $checkTokenValidityCommand): ApiKey
     {
 
         $apiKey = $this->apiKeyRepository->findOneBy([
@@ -31,6 +31,8 @@ class CheckTokenValidityCommandHandler
         if ($apiKey === null) {
             throw new InvalidAuthTokenException('Invalid token');
         }
+
+        return $apiKey;
 
     }
 }
